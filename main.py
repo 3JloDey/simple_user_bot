@@ -6,8 +6,8 @@ from pyrogram import idle
 from pyrogram.handlers import MessageHandler
 
 from config import load_config
-from userbot.handlers.clown_reaction import disrespect
-from userbot.handlers.slowtyping import typing
+from userbot.handlers.reactions import disrespect
+from userbot.handlers.typing import clear_history, slowtyping
 
 
 async def main() -> None:
@@ -17,9 +17,10 @@ async def main() -> None:
         api_id=config.user_bot.api_id,
         api_hash=config.user_bot.api_hash,
     )
-
-    app.add_handler(MessageHandler(typing, F.me & F.text & F.command("t", ".")))
-    app.add_handler(MessageHandler(disrespect, F.all & F.user(1028068811)))
+    
+    app.add_handler(MessageHandler(slowtyping, F.me & F.text & F.command("s", ".")))
+    app.add_handler(MessageHandler(clear_history, F.me & F.text & F.command("clear", ".")))
+    app.add_handler(MessageHandler(disrespect, F.all & F.user([447938930, 1028068811])))
 
     async with app:
         await idle()
