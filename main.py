@@ -7,7 +7,7 @@ from pyrogram.handlers import MessageHandler
 
 from config import load_config
 from userbot.handlers.reactions import disrespect
-from userbot.handlers.typing import clear_history, slowtyping
+from userbot.handlers.typing import clear_history, slowtyping, react_all_messages
 
 USERS = [447938930, 1028068811]
 
@@ -21,6 +21,7 @@ async def main() -> None:
     
     app.add_handler(MessageHandler(slowtyping, F.me & F.text & F.command("s", ".")))
     app.add_handler(MessageHandler(clear_history, F.me & F.text & F.command("clear", ".")))
+    app.add_handler(MessageHandler(react_all_messages, F.me & F.text & F.command("react", ".")))
     app.add_handler(MessageHandler(disrespect, F.all & F.user(USERS)))
 
     async with app:
