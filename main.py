@@ -5,7 +5,6 @@ from pyrogram import Client
 from pyrogram import filters as F
 from pyrogram import idle
 from pyrogram.handlers import MessageHandler
-from pyrogram.enums import ParseMode
 
 from config import load_config
 from userbot.handlers.send_voice import send_tinkoff_voice
@@ -14,9 +13,10 @@ from userbot.handlers.slow_type import slowtyping
 from userbot.handlers.search_in_google import google_search
 
 
-INFO ="""Для медленной печати введите <code>/s текст</code>
-\nДля очистки <b>вашей</b> истории сообщений введите <code>/clear</code>\n
-Триггер слова для Олега Тинькова: заебись, пиздец, прихерел, выродок, похуй, говно, сомнительно"""
+INFO ="""Для медленной печати введите `/s текст`\n
+Для очистки __вашей__ истории сообщений введите `/clear`\n
+Для поиска в google введите `/google`\n 
+Триггер-слова для Олега Тинькова: заебись, пиздец, прихерел, выродок, похуй, говно, сомнительно"""
 
 async def main() -> None:
     config = load_config()
@@ -25,7 +25,6 @@ async def main() -> None:
         "my_account",
         api_id=config.user_bot.api_id,
         api_hash=config.user_bot.api_hash,
-        parse_mode=ParseMode.HTML
     )
     
     app.add_handler(MessageHandler(slowtyping, F.me & F.command("s")))
